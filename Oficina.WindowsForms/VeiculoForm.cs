@@ -61,12 +61,31 @@ namespace Oficina.WindowsForms
             if (Formulario.Validar(this, VeiculoErrorProvider))
             {
                 GravarVeiculo();
+                MessageBox.Show("Veículo gravado com sucesso!");
+                Formulario.Limpar(this);
+                placaMaskedTextBox1.Focus();
             }
         }
 
         private void GravarVeiculo()
         {
+            var veiculo = new VeiculoPasseio();
 
+            veiculo.Ano = Convert.ToInt32(anoMaskedTextBox2.Text);
+            veiculo.Cambio = (Cambio)cambioComboBox4.SelectedItem;
+            veiculo.Carroceria = Carroceria.Hatch;
+            veiculo.Combustivel = (Combustivel)combustivelComboBox3.SelectedItem;
+            veiculo.Cor = (Cor)corComboBox5.SelectedItem;
+            veiculo.Modelo = (Modelo)modeloComboBox2.SelectedItem;
+            veiculo.Observacao = observacaoTextBox1.Text;
+            veiculo.Placa = placaMaskedTextBox1.Text.ToUpper();
+
+            new VeiculoRepositorio().Inserir(veiculo);
+        }
+
+        private void limparButton2_Click(object sender, EventArgs e)
+        {
+            Formulario.Limpar(this);
         }
     }
 }

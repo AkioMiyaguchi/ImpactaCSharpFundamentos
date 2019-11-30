@@ -9,15 +9,18 @@ using System.Threading.Tasks;
 
 namespace Oficina.Repositorios.SistemaArquivos
 {
-    public class MarcaRepositorio
+    public class MarcaRepositorio : RepositorioBase
     {
-        private string caminhoArquivo = ConfigurationManager.AppSettings["caminhoArquivoMarca"];
+        public MarcaRepositorio() : base("caminhoArquivoMarca")
+        {
+        }
 
+        // ToDo: OO - polimorfismo por sobrecarga.
         public List<Marca> Obter()
         {
             var marcas = new List<Marca>();
 
-            foreach (var linha in File.ReadAllLines(caminhoArquivo))
+            foreach (var linha in File.ReadAllLines(CaminhoArquivo))
             {
                 if (string.IsNullOrEmpty(linha))
                     continue;
@@ -39,7 +42,7 @@ namespace Oficina.Repositorios.SistemaArquivos
         {
             Marca marca = null;
 
-            foreach (var linha in File.ReadAllLines(caminhoArquivo))
+            foreach (var linha in File.ReadAllLines(CaminhoArquivo))
             {
                 if (string.IsNullOrEmpty(linha))
                     continue;

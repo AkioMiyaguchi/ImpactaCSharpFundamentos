@@ -95,7 +95,8 @@
             this.placaMaskedTextBox1.Name = "placaMaskedTextBox1";
             this.placaMaskedTextBox1.Size = new System.Drawing.Size(121, 20);
             this.placaMaskedTextBox1.TabIndex = 1;
-            this.placaMaskedTextBox1.Tag = "*";
+            this.placaMaskedTextBox1.Tag = "*PLACA";
+            this.placaMaskedTextBox1.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // anoMaskedTextBox2
             // 
@@ -104,7 +105,7 @@
             this.anoMaskedTextBox2.Name = "anoMaskedTextBox2";
             this.anoMaskedTextBox2.Size = new System.Drawing.Size(121, 20);
             this.anoMaskedTextBox2.TabIndex = 7;
-            this.anoMaskedTextBox2.Tag = "*";
+            this.anoMaskedTextBox2.Tag = "*ANO";
             // 
             // marcaComboBox1
             // 
@@ -188,6 +189,7 @@
             this.limparButton2.TabIndex = 16;
             this.limparButton2.Text = "Limpar";
             this.limparButton2.UseVisualStyleBackColor = true;
+            this.limparButton2.Click += new System.EventHandler(this.limparButton2_Click);
             // 
             // observacaoGroupBox1
             // 

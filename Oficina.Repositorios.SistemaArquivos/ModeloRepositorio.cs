@@ -9,16 +9,20 @@ using System.Xml.Linq;
 
 namespace Oficina.Repositorios.SistemaArquivos
 {
-    public class ModeloRepositorio
+    public class ModeloRepositorio : RepositorioBase
     {
-        private XDocument arquivoXML = XDocument.Load(
-            ConfigurationManager.AppSettings["caminhoArquivoModelo"]);
+        private XDocument arquivoXml;
+
+        public ModeloRepositorio() : base("caminhoArquivoModelo")
+        {
+            arquivoXml = XDocument.Load(CaminhoArquivo);
+        }
 
         public List<Modelo> ObterPorMarca(int marcaId)
         {
             var modelos = new List<Modelo>();
 
-            foreach (var elemento in arquivoXML.Descendants("modelo"))
+            foreach (var elemento in arquivoXml.Descendants("modelo"))
             {
                 if (marcaId.ToString() == elemento.Element("marcaId").Value)
                 {
@@ -42,7 +46,7 @@ namespace Oficina.Repositorios.SistemaArquivos
         {
             Modelo modelo = null;
 
-            foreach (var elemento in arquivoXML.Descendants("modelo"))
+            foreach (var elemento in arquivoXml.Descendants("modelo"))
             {
                 if (Id.ToString() == elemento.Element("Id").Value)
                 {
