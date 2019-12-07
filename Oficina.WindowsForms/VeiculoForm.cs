@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,29 +59,51 @@ namespace Oficina.WindowsForms
 
         private void gravarButton1_Click(object sender, EventArgs e)
         {
-            if (Formulario.Validar(this, VeiculoErrorProvider))
+            try
             {
-                GravarVeiculo();
-                MessageBox.Show("Veículo gravado com sucesso!");
-                Formulario.Limpar(this);
-                placaMaskedTextBox1.Focus();
+                if (Formulario.Validar(this, VeiculoErrorProvider))
+                {
+                    GravarVeiculo();
+                    MessageBox.Show("Veículo gravado com sucesso!");
+                    Formulario.Limpar(this);
+                    placaMaskedTextBox1.Focus();
+                }
             }
+            catch (FileNotFoundException excecao)
+            {
+                MessageBox.Show($"O arquivo {excecao.FileName} não foi encontrado.");
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("O arquivo veiculo.xml está com o atributo Somente leitura.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eita! Algo deu errado e em breve teremos uma solução.");
+                //Logar(ex); - Log4Net
+            }
+            finally
+            {
+                //É executado sempre! Mesmo que haja algum return no código.
+            }
+
+
         }
 
         private void GravarVeiculo()
         {
-            var veiculo = new VeiculoPasseio();
+                var veiculo = new VeiculoPasseio();
 
-            veiculo.Ano = Convert.ToInt32(anoMaskedTextBox2.Text);
-            veiculo.Cambio = (Cambio)cambioComboBox4.SelectedItem;
-            veiculo.Carroceria = Carroceria.Hatch;
-            veiculo.Combustivel = (Combustivel)combustivelComboBox3.SelectedItem;
-            veiculo.Cor = (Cor)corComboBox5.SelectedItem;
-            veiculo.Modelo = (Modelo)modeloComboBox2.SelectedItem;
-            veiculo.Observacao = observacaoTextBox1.Text;
-            veiculo.Placa = placaMaskedTextBox1.Text.ToUpper();
+                veiculo.Ano = Convert.ToInt32(anoMaskedTextBox2.Text);
+                veiculo.Cambio = (Cambio)cambioComboBox4.SelectedItem;
+                veiculo.Carroceria = Carroceria.Hatch;
+                veiculo.Combustivel = (Combustivel)combustivelComboBox3.SelectedItem;
+                veiculo.Cor = (Cor)corComboBox5.SelectedItem;
+                veiculo.Modelo = (Modelo)modeloComboBox2.SelectedItem;
+                veiculo.Observacao = observacaoTextBox1.Text;
+                veiculo.Placa = placaMaskedTextBox1.Text.ToUpper();
 
-            new VeiculoRepositorio().Inserir(veiculo);
+                new VeiculoRepositorio().Inserir(veiculo);
         }
 
         private void limparButton2_Click(object sender, EventArgs e)
