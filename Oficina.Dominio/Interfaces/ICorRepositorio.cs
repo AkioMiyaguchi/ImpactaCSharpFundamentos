@@ -8,7 +8,7 @@ namespace Oficina.Dominio.Interfaces
 {
     public interface ICorRepositorio
     {
-        void Salvar(Cor cor);
+        int Salvar(Cor cor);
         List<Cor> Ler();
         void Apagar(int Id);
         void Atualizar(Cor cor);

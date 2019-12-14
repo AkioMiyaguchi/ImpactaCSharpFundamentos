@@ -89,6 +89,10 @@
       <Project>{08854398-5ae1-401f-a4c6-98b9dc37ce08}</Project>
       <Name>Oficina.Repositorios.SistemaArquivos</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Oficina.Repositorios.SqlServer\Oficina.Repositorios.SqlServer.csproj">
+      <Project>{fe419594-3c2b-4a29-b67f-68483012714c}</Project>
+      <Name>Oficina.Repositorios.SqlServer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\Dados\Cor.txt" />

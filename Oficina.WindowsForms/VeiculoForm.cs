@@ -1,5 +1,6 @@
 ﻿using Oficina.Dominio;
 using Oficina.Repositorios.SistemaArquivos;
+using Oficina.Repositorios.SqlServer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,7 @@ namespace Oficina.WindowsForms
             marcaComboBox1.ValueMember = "Id";
             marcaComboBox1.SelectedIndex = -1;
 
-            corComboBox5.DataSource = new CorRepositorio().Obter();
+            corComboBox5.DataSource = new Repositorios.SqlServer.CorRepositorio().Ler();
             corComboBox5.DisplayMember = "Nome";
             corComboBox5.ValueMember = "Id";
             corComboBox5.SelectedIndex = -1;
